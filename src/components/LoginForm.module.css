@@ -1,0 +1,43 @@
+.form {
+    background: wheat;
+    border-radius: clamp(10px, 5vw, 25px);
+    padding: clamp(16px, 5vw, 32px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: clamp(300px, 30vw, 660px);
+    }
+
+.form__heading{
+    font-weight: 200;
+}
+.form__field {
+    position: relative;
+}
+.form__fieldLabel{
+    border: none;
+    border-radius: 5px;
+    padding: 3px;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    transform: translateY(-50%);
+    background-color: #fff;
+
+}
+.form__fieldInput{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 16px;
+}
+
+.form__button {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 16px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff9741;
+    color: #ffffff;
+}

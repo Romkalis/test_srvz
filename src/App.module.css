@@ -1,6 +1,43 @@
 .app {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
     place-items: center;
+    height: 100vh;
+}
+
+.app__section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: darkgrey;
+    background-color: #e8e8e8;
+    padding: clamp(10px, 5vw, 20px);
+    border-radius: clamp(10px, 5vw, 25px);
+
+}
+
+.app__image {
+    width: clamp(300px, 30vw, 660px);
+    border-radius: clamp(10px, 5vw, 25px);
+}
+
+.app__heading {
+    font-weight: 200;
+}
+
+.app__button {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 16px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff9741;
+    color: #ffffff;
+    transition: all .3s ease;
+}
+.app__button:hover,
+.app__button:active {
+    background-color: #f88423;
 }

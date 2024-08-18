@@ -1,61 +1,89 @@
+
 import {observer} from "mobx-react-lite";
-import LoginFormState from "../store/LoginFormState.tsx";
+import LoginFormState, {LoginFormStateType} from "../store/LoginFormState.ts";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import s from './LoginForm.module.css'
+import {useState} from "react";
+
+
+export interface initialValuesType {
+  login: string;
+  password: string;
+}
+
+
 
 export const LoginForm = observer(
   () => {
 
-    const {isValid,
+    const [isSending, setIsSending] = useState(false)
+
+    const {
       login,
       password,
-      setIsValid,
       setLogin,
       setPassword,
-    } = LoginFormState;
+      setIsValid
+    }: LoginFormStateType = LoginFormState;
 
-    let initialValues = {
+    let initialValues:initialValuesType = {
       login: login,
-      password: password
+      password: password,
     }
 
-    const onSubmitHandler = (values) => {
-      console.log(`Submit!, login: ${values.login}, password : ${values.password}`)
-      setLogin(values.login)
-      setPassword(values.password)
-      setIsValid(true)
+    const onSend = (values: initialValuesType) => {
+      setIsSending(true)
+
+      setTimeout(() => {
+          console.log(`Send data to server: login: ${values.login}, password: ${values.password}`);
+
+          setLogin(values.login)
+          setPassword(values.password)
+          setIsValid(true)
+          setIsSending(false)
+
+      }, 1000);
+    };
+    const onSubmitHandler = (values, {resetForm}) => {
+      onSend(values)
+      resetForm();
     }
 
     return (
       <>
-
         <Formik initialValues={initialValues} onSubmit={onSubmitHandler}>
           <Form className={s.form}>
             <h2 className={s.form__heading}>Login Form</h2>
 
-            <div className={s.form__field}>
-              <label className={s.form__fieldLabel} htmlFor="login">Enter e-mail</label>
+              <label htmlFor="login">
               <Field type={'email'}
                      name={'login'}
                      className={s.form__fieldInput}
                      placeholder={'Enter e-mail'}
                      required
+                     disabled={isSending}
               />
               <ErrorMessage name={'login'} component={'div'} />
-            </div>
+              </label>
 
-            <div className={s.form__field}>
-              <label className={s.form__fieldLabel} htmlFor="password">Enter password</label>
+
+              <label htmlFor="password">
               <Field type={'password'}
                      name={'password'}
                      className={s.form__fieldInput}
                      placeholder={'Enter password'}
                      required
+                     disabled={isSending}
               />
               <ErrorMessage name={'password'} component={'div'} />
-            </div>
 
-            <button className={s.form__button} type={'submit'}> Send </button>
+              </label>
+
+            <button className={s.form__button}
+                    type={'submit'}
+                    disabled={isSending}>
+              Send
+            </button>
 
           </Form>
 

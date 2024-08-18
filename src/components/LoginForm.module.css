@@ -35,3 +35,8 @@
     background-color: darkgrey;
     cursor: not-allowed;
 }
+
+.form__error {
+    color: red;
+    font-size: 12px;
+}

@@ -4,6 +4,7 @@ import LoginFormState, {LoginFormStateType} from "../store/LoginFormState.ts";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import s from './LoginForm.module.css'
 import {useState} from "react";
+import * as Yup from 'yup';
 
 
 export interface initialValuesType {
@@ -11,10 +12,18 @@ export interface initialValuesType {
   password: string;
 }
 
-
-
 export const LoginForm = observer(
   () => {
+
+    const loginValidationSchema = Yup.object({
+      login: Yup.string()
+        .email('Неправильный формат почты')
+        .required('Это поле обязательное')
+      ,
+      password: Yup.string()
+        .required('Это поле обязательное')
+        .min(5, 'Пароль должен быть больше 4х символов')
+    })
 
     const [isSending, setIsSending] = useState(false)
 
@@ -51,31 +60,32 @@ export const LoginForm = observer(
 
     return (
       <>
-        <Formik initialValues={initialValues} onSubmit={onSubmitHandler}>
+        <Formik initialValues={initialValues}
+                onSubmit={onSubmitHandler}
+                validationSchema={loginValidationSchema}
+        >
           <Form className={s.form}>
             <h2 className={s.form__heading}>Login Form</h2>
 
               <label htmlFor="login">
-              <Field type={'email'}
+                <ErrorMessage name={'login'} component={'span'}  className={s.form__error}/>
+                <Field type={'email'}
                      name={'login'}
                      className={s.form__fieldInput}
                      placeholder={'Enter e-mail'}
-                     required
                      disabled={isSending}
               />
-              <ErrorMessage name={'login'} component={'div'} />
               </label>
 
 
               <label htmlFor="password">
-              <Field type={'password'}
+                <ErrorMessage name={'password'} component={'span'} className={s.form__error}/>
+                <Field type={'password'}
                      name={'password'}
                      className={s.form__fieldInput}
                      placeholder={'Enter password'}
-                     required
                      disabled={isSending}
               />
-              <ErrorMessage name={'password'} component={'div'} />
 
               </label>
 

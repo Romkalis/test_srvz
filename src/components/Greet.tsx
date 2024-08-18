@@ -34,6 +34,8 @@ export const Greet = () => {
         Выйти
       </button>
 
+      <NavLink className={s.app__link} to={'/auth'}>На страницу авторизации</NavLink>
+
     </div>
   )
 }

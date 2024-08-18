@@ -25,7 +25,6 @@ export const App = observer(
         <Routes>
             <Route path={'/auth'} element={<LoginForm />} />
             <Route path={'/main'} element={<Greet />} />
-            <Route path={'/*'}  element={<Navigate to={isValid ? '/main' : '/auth'} />}/>
         </Routes>
       </div>
     )

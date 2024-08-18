@@ -25,6 +25,11 @@
 .app__heading {
     font-weight: 200;
 }
+.app__link,
+.app__link:visited {
+    color: #f88423;
+    text-decoration: none;
+}
 
 .app__button {
     box-sizing: border-box;

@@ -37,6 +37,8 @@
 }
 
 .form__error {
+    display: inline-block;
+    margin: 5px;
     color: red;
     font-size: 12px;
 }
